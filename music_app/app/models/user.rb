@@ -34,7 +34,7 @@ class User < ApplicationRecord
     def password=(password)
         #.create creates a password_digest by hashing the passed in arg
         @password = password #sets password to an instance var we can validate at top.  Need this since the password is not saved as a db column.
-        self.password_digest = Bcrypt::Password.create(password)
+        self.password_digest = BCrypt::Password.create(password)
     end
 
     def is_password?(password)
@@ -43,5 +43,4 @@ class User < ApplicationRecord
         BCrypt::Password.new(self.password_digest).is_password?(password)
     end
 end
-        #@user = User.find_by(params[:user][:email], params[:user][:password]) GOES IN SESSIONS CONTROLLER
 
